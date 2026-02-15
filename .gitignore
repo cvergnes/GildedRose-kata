@@ -58,6 +58,8 @@ nunit-*.xml
 *.sln.DotSettings.user
 
 
+# Verify
+*.received.txt
 
 
 # macos

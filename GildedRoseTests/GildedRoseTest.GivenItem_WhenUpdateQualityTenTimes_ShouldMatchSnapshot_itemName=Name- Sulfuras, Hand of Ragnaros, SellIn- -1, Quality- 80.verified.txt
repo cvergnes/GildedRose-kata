@@ -1,0 +1,7 @@
+﻿[
+  {
+    Name: Sulfuras, Hand of Ragnaros,
+    SellIn: -1,
+    Quality: 80
+  }
+]
