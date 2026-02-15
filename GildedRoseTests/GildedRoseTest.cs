@@ -19,7 +19,7 @@ public class GildedRoseTest
     [InlineData("Sulfuras, Hand of Ragnaros", 0, 80)]
     [InlineData("Sulfuras, Hand of Ragnaros", -1, 80)]
     [InlineData("Backstage passes to a TAFKAL80ETC concert", 15, 20)]
-    [InlineData("Backstage passes to a TAFKAL80ETC concert", 10, 49)]
+    [InlineData("Backstage passes to a TAFKAL80ETC concert", 10, 26)]
     [InlineData("Backstage passes to a TAFKAL80ETC concert", 5, 49)]
     [InlineData("Conjured Mana Cake", 3, 6)]
     public Task GivenItem_WhenUpdateQualityTenTimes_ShouldMatchSnapshot(string itemName, int sellIn, int quality)

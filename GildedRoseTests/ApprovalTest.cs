@@ -17,12 +17,12 @@ public class ApprovalTest
     [Fact]
     public Task ThirtyDays()
     {
-        var fakeoutput = new StringBuilder();
-        Console.SetOut(new StringWriter(fakeoutput));
+        var fakeOutput = new StringBuilder();
+        Console.SetOut(new StringWriter(fakeOutput));
         Console.SetIn(new StringReader($"a{Environment.NewLine}"));
 
         Program.Main(["30"]);
-        var output = fakeoutput.ToString();
+        var output = fakeOutput.ToString();
 
         return Verifier.Verify(output);
     }

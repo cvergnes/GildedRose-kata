@@ -1,0 +1,7 @@
+﻿[
+  {
+    Name: Elixir of the Mongoose,
+    SellIn: -25,
+    Quality: 12
+  }
+]

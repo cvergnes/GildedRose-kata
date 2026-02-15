@@ -1,0 +1,7 @@
+﻿[
+  {
+    Name: +5 Dexterity Vest,
+    SellIn: -20,
+    Quality: 30
+  }
+]
