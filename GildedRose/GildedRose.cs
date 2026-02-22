@@ -24,6 +24,33 @@ public class GildedRose
         }
     }
 
+    private int ComputeQuality(Item item)
+    {
+        var quality = item.Quality;
+
+        if (item.Name == SulfurasHandOfRagnaros)
+        {
+            return item.Quality;
+        }
+
+        if (item.Name == AgedBrie)
+        {
+            return CompteQualityAgedBrie(item, quality);
+        }
+
+        if (item.Name == BackstagePassesToATafkal80EtcConcert)
+        {
+            return ComputeQualityConcert(item, quality);
+        }
+        quality = DecrementQuality(quality);
+
+        if (item.SellIn < 0)
+        {
+            quality = DecrementQuality(quality);
+        }
+        return quality;
+    }
+    
     private int ComputeSellIn(Item item)
     {
         if (item.Name != SulfurasHandOfRagnaros)
@@ -51,36 +78,19 @@ public class GildedRose
         return quality;
     }
 
-    private int ComputeQuality(Item item)
+    private int ComputeQualityConcert(Item item, int quality)
     {
-        var quality = item.Quality;
+        quality = IncrementQuality(quality);
+        if (item.SellIn < 10) quality = IncrementQuality(quality);
+        if (item.SellIn < 5) quality = IncrementQuality(quality);
+        if (item.SellIn < 0) quality = 0;
+        return quality;
+    }
 
-        if (item.Name == SulfurasHandOfRagnaros)
-        {
-            return item.Quality;
-        }
-
-        if (item.Name == AgedBrie)
-        {
-            quality = IncrementQuality(quality);
-            if (item.SellIn < 0) quality = IncrementQuality(quality);
-            return quality;
-        }
-
-        if (item.Name == BackstagePassesToATafkal80EtcConcert)
-        {
-            quality = IncrementQuality(quality);
-            if (item.SellIn < 10) quality = IncrementQuality(quality);
-            if (item.SellIn < 5) quality = IncrementQuality(quality);
-            if (item.SellIn < 0) quality = 0;
-            return quality;
-        }
-        quality = DecrementQuality(quality);
-
-        if (item.SellIn < 0)
-        {
-            quality = DecrementQuality(quality);
-        }
+    private int CompteQualityAgedBrie(Item item, int quality)
+    {
+        quality = IncrementQuality(quality);
+        if (item.SellIn < 0) quality = IncrementQuality(quality);
         return quality;
     }
 }
