@@ -12,14 +12,7 @@ public class GildedRose
 
     public GildedRose(IList<Item> items)
     {
-        this._items = items.Select(item => item).ToList();
-    }
-
-    public IReadOnlyCollection<Item> Items => _items.Select(item => item).ToList();
-
-    private bool IsProductWithDecreasedQuality(Item item)
-    {
-        return item.Name != BackstagePassesToATafkal80EtcConcert;
+        _items = items.Select(item => item).ToList();
     }
 
     public void UpdateQuality()
@@ -37,7 +30,6 @@ public class GildedRose
         {
             return item.SellIn - 1;
         }
-
         return item.SellIn;
     }
 
@@ -47,7 +39,6 @@ public class GildedRose
         {
             return quality + 1;
         }
-
         return quality;
     }
 
@@ -57,7 +48,6 @@ public class GildedRose
         {
             return quality - 1;
         }
-
         return quality;
     }
 
