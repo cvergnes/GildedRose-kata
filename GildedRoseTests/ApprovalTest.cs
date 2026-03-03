@@ -1,12 +1,9 @@
 ﻿using GildedRoseKata;
-
 using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-
 using VerifyXunit;
-
 using Xunit;
 
 namespace GildedRoseTests;

@@ -1,10 +1,8 @@
 ﻿using Xunit;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using GildedRoseKata;
-using VerifyTests;
 using VerifyXunit;
 
 namespace GildedRoseTests;

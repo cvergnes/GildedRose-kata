@@ -8,7 +8,7 @@ public class GildedRose
     private const string BackstagePassesToATafkal80EtcConcert = "Backstage passes to a TAFKAL80ETC concert";
     private const string AgedBrie = "Aged Brie";
     private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
-    private readonly IList<Item> _items;
+    private readonly List<Item> _items;
 
     public GildedRose(IList<Item> items)
     {
@@ -17,80 +17,21 @@ public class GildedRose
 
     public void UpdateQuality()
     {
-        foreach (var item in _items)
-        {
-            item.SellIn = ComputeSellIn(item);
-            item.Quality = ComputeQuality(item);
-        }
+        _items.Select(GetStrategy).ToList().ForEach(strategy => strategy.UpdateItem());
     }
 
-    private int ComputeQuality(Item item)
+    private IStrategy GetStrategy(Item item)
     {
-        var quality = item.Quality;
-
-        if (item.Name == SulfurasHandOfRagnaros)
+        switch (item.Name)
         {
-            return item.Quality;
+            case AgedBrie:
+                return new StrategyAgedBrie(item);
+            case BackstagePassesToATafkal80EtcConcert:
+                return new StrategyBackstagePassesToATafkal80EtcConcert(item);
+            case SulfurasHandOfRagnaros:
+                return new StrategySulfurasHandOfRagnaros(item);
+            default:
+                return new StrategyDefault(item);
         }
-
-        if (item.Name == AgedBrie)
-        {
-            return CompteQualityAgedBrie(item, quality);
-        }
-
-        if (item.Name == BackstagePassesToATafkal80EtcConcert)
-        {
-            return ComputeQualityConcert(item, quality);
-        }
-        quality = DecrementQuality(quality);
-
-        if (item.SellIn < 0)
-        {
-            quality = DecrementQuality(quality);
-        }
-        return quality;
-    }
-    
-    private int ComputeSellIn(Item item)
-    {
-        if (item.Name != SulfurasHandOfRagnaros)
-        {
-            return item.SellIn - 1;
-        }
-        return item.SellIn;
-    }
-
-    private int IncrementQuality(int quality)
-    {
-        if (quality < 50)
-        {
-            return quality + 1;
-        }
-        return quality;
-    }
-
-    private int DecrementQuality(int quality)
-    {
-        if (quality > 0)
-        {
-            return quality - 1;
-        }
-        return quality;
-    }
-
-    private int ComputeQualityConcert(Item item, int quality)
-    {
-        quality = IncrementQuality(quality);
-        if (item.SellIn < 10) quality = IncrementQuality(quality);
-        if (item.SellIn < 5) quality = IncrementQuality(quality);
-        if (item.SellIn < 0) quality = 0;
-        return quality;
-    }
-
-    private int CompteQualityAgedBrie(Item item, int quality)
-    {
-        quality = IncrementQuality(quality);
-        if (item.SellIn < 0) quality = IncrementQuality(quality);
-        return quality;
     }
 }
